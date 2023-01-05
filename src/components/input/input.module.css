@@ -18,7 +18,7 @@ input, select{
   font-size: 1.02rem;
   background: #fff;
   text-indent: 40px;
-  box-shadow: 5px 4px 10px rgba(0,0,0, 0.2);
+   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 .search{
  display: flex;

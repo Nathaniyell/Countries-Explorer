@@ -3,27 +3,29 @@ import inputStyle from './input.module.css'
 import { BiSearch } from 'react-icons/bi'
 
 const Input = () => {
-  const [formData, setFormData] = useState({name: '', region: ''})
-  const [term, setTerm] = useState('all')
+  const [searchTerm, setSearchTerm] = useState("")
+  const [ filter, setFilter ] = useState('')
+  const [term, setTerm] = useState('name')
   const [fetchMe, setFetchMe] = useState(`https://restcountries.com/v3.1/${term}`)
+
+function handleChange(e){
+  setSearchTerm(e.target.value)
+  console.log(searchTerm)
+}
+
   
   function getData() {
-   if(formData.name === ''){
+   if(searchTerm === ''){
      setTerm('all')     
-   }else if(formData.name !== ''){
+   }else{
      setTerm('name') 
        &&  
-       setFetchMe(`https://restcountries.com/v3.1/${term}/${formData.name}`)
-   }else if(formData.region !== '') {
-     setTerm('region')
-     &&
-       setFetchMe(`https://restcountries.com/v3.1/${term}/${formData.region}`)
+       setFetchMe(`https://restcountries.com/v3.1/${term}/${searchTerm}`)
    }
-
       fetch(fetchMe)
       .then(res => res.json())
       .then(data => {
-        con
+        console.log(data)
       })
       .catch(err => console.log(err))
       }
@@ -37,44 +39,23 @@ const Input = () => {
     }
   }, [])
 
-  function handleChange(event) {
-    setFormData(prevFormData => {
-      return {
-        ...prevFormData,
-        [event.target.name]: [event.target.value]
-      }
-    })
-    console.log(formData.name)
-  }
+
   function formSubmitHandler(event) {
     event.preventDefault()
-    
-    setFormData(prevFormData => {
-      return {
-        ...prevFormData,
-        name: '',
-        region: ''
-      }
-    })
-  }
+     }
 
   return (
     <form className={inputStyle.form} onSubmit={formSubmitHandler} >
       <div className={inputStyle.inputDiv}>
-        <input
-          type='text'
-          placeholder="Search for a Country"
-          onChange={handleChange}
-          name='name'
-          value={formData.name}
-        />
+       <input 
+         value={searchTerm}
+         />
         <div className={inputStyle.search}> <BiSearch /></div>
       </div>
       <select
         className={inputStyle.select}
-        onChange={handleChange}
-        name='region'
-        value={formData.region}
+        value={filter}
+        onChange={(e)=>{setFilter(e.target.value)}}
       >
         <option value=''>Filter by region</option>
         <option value='Africa' >Africa</option>

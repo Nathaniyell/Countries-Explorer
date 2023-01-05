@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default const Countries = (props)=>{
+export default function Countries(props){
   return(
     <section>
     
