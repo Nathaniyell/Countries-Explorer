@@ -8,7 +8,7 @@ section{
 .container{
   background: #fff;
   border-radius: 5px;
-  height: 310px;
+  height: 320px;
 }
 .image{
     width: 100%;
@@ -23,13 +23,13 @@ section{
 .text{
 /*   background: blue; */
   width: 90%;
+  height: 110px;
   margin: 20px auto 0;
   line-height: 2;
 }
 .text h3{
   font-size: 1rem;
-  font-weight: 600;
 }
 .text p{
-  font-size: 0.8rem;
+  font-size: 0.82rem;
 }

@@ -2,10 +2,11 @@ import React from 'react'
 import styles from './countries.module.css'
 
 const Countries = (props) => {
-  if (!props.countryList) {
+  const countryArray = props.countryList
+  if (countryArray.length < 2) {
     return
   }
-  const countryArray = props.countryList
+     
   const cards = countryArray.map((country) => {
     return <div className={styles.container} key={country.name.official}>
       <div className={styles.image}>
@@ -19,11 +20,8 @@ const Countries = (props) => {
      </div>
     </div>
   })
-
-  // console.log(countryArray)
- 
-
-  return (
+ // console.log(countryArray)
+   return (
     <section>
       {cards}
     </section>

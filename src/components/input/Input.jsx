@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import inputStyle from './input.module.css'
 import { BiSearch } from 'react-icons/bi'
-import Countries from '../countries/Countries'
+// import Countries from '../countries/Countries'
 
 const Input = () => {
   const [searchTerm, setSearchTerm] = useState("")
@@ -12,37 +12,40 @@ const Input = () => {
 
   function handleChange(e) {
     setSearchTerm(e.target.value)
-    // console.log(searchTerm)
+    console.log(searchTerm)
   }
 
 
   function getData() {
-    if (searchTerm !== '') {
+    if (searchTerm.trim().length > 0) {
       setTerm('name')
     }
-    fetch(`https://restcountries.com/v3.1/${term}/${searchTerm}`)
+    setTimeout(()=>{
+      fetch(`https://restcountries.com/v3.1/${term}/${searchTerm}`)
       .then(res => res.json())
       .then(data => {
         const countries = data
-        // console.log(data)
+        console.log(data)
         setAllCountries(countries)
       })
       .catch(err => console.log(err))
+    }, 2000)
   }
 
 
   useEffect(() => {
-    const timedData = setTimeout(getData(), 5000)
+    const timedData = setTimeout(()=>getData(),100)
 
     return () => {
-      clearTimeout(timedData)
+      clearTimeout(()=>timedData)
     }
   }, [searchTerm])
 
 
   function formSubmitHandler(event) {
     event.preventDefault()
-    console.log(allCountries)
+     console.log(allCountries)
+    // setTerm('all')
     setSearchTerm('')
   }
 
@@ -69,9 +72,7 @@ const Input = () => {
         <option value='Europe' >Europe</option>
       </select>
     </form>
-      <Countries 
-        countryList={allCountries}
-        />
+    
       </>
 
   )
