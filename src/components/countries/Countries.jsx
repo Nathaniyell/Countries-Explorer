@@ -2,12 +2,12 @@ import React from 'react'
 import styles from './countries.module.css'
 
 const Countries = (props) => {
-  const countryArray = props.countryList
-  if (countryArray.length < 2) {
-    return
-  }
+  const countryArray = props.countryList 
+  // if (!countryArray) {
+  //   return
+  // }
      
-  const cards = countryArray.map((country) => {
+  const cards = countryArray?.map((country) => {
     return <div className={styles.container} key={country.name.official}>
       <div className={styles.image}>
         <img src={country.flags.png} alt={country.name.official} />
