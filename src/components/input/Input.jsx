@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import { nanoid } from 'nanoid';
 import inputStyle from './input.module.css';
 import { BiSearch } from 'react-icons/bi';
 import Countries from '../countries/Countries'
@@ -15,11 +14,8 @@ const Input = () => {
   }
 
   function getData() {
-    if (searchTerm.trim().length > 0) {
-      setTerm('name');
-    }
-
-    setTimeout(() => {
+    setTerm(searchTerm.trim().length > 0 ? 'name': 'all')
+   
       fetch(`https://restcountries.com/v3.1/${term}/${searchTerm}`)
         .then(res => res.json())
         .then(data => {
@@ -27,28 +23,19 @@ const Input = () => {
           setAllCountries(countries);
         })
         .catch(err => console.log(err));
-    }, 2000);
-  }
-
-  function handleFilterChange() {
-    if (filter) {
-      setTerm('region')
-    }
+   
   }
 
   useEffect(() => {
-    handleFilterChange()
-    const timedData = setTimeout(() => getData(), 100);
-    return () => {
-      clearTimeout(() => timedData);
-    };
+   setTerm(filter ? 'region': 'all')
+   getData();
+    return()=>{}
+    
   }, [filter, searchTerm]);
 
   function formSubmitHandler(event) {
     event.preventDefault();
   }
-
-
 
   return (
     <>
@@ -79,4 +66,5 @@ const Input = () => {
 };
 
 export default Input;
+
 
