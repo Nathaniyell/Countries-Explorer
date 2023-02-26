@@ -5,52 +5,56 @@ import Countries from '../countries/Countries';
 
 const Input = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [allCountries, setAllCountries] = useState([]);
-  const [filter, setFilter] = useState('');
-  const [endpoint, setEndPoint] = useState('all')
+  const [countryList, setCountryList] = useState([]);
+  const [selectedRegion, setSelectedRegion] = useState('');
 
   useEffect(() => {
-    if (!searchTerm && !filter) {
-      return;
+    async function fetchData() {
+      let searchEndpoint = "all";
+      if (searchTerm.trim().length > 0) {
+        searchEndpoint = `name/${searchTerm}`;
+      } else if (selectedRegion) {
+        searchEndpoint = `region/${selectedRegion}`;
+      }
+      try {
+        const response = await fetch(`https://restcountries.com/v3.1/${searchEndpoint}`);
+        const data = await response.json();
+        setCountryList(data);
+      } catch (error) {
+        console.error(error);
+      }
     }
 
-    // let endpoint = "all";
-    if (searchTerm.trim().length > 0) {
-      setEndPoint(`name/${searchTerm}`);
-    } else if (filter) {
-       setEndPoint(`region/${filter}`);
-    }
+    fetchData();
+  }, [searchTerm, selectedRegion]);
 
-    fetch(`https://restcountries.com/v3.1/${endpoint}`)
-      .then(res => res.json())
-      .then(data => setAllCountries(data))
-      .catch(err => console.error(err));
-  }, [searchTerm, filter, endpoint]);
-
-  function handleChange(e) {
+  function handleSearchInputChange(e) {
     setSearchTerm(e.target.value);
   }
 
-  function formSubmitHandler(event) {
-    event.preventDefault();
-    // setSearchTerm("")
+  function handleRegionChange(e) {
+    setSelectedRegion(e.target.value);
+  }
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
   }
 
   return (
     <>
-      <form className={inputStyle.form} onSubmit={formSubmitHandler}>
+      <form className={inputStyle.form} onSubmit={handleFormSubmit}>
         <div className={inputStyle.inputDiv}>
           <input
             value={searchTerm}
-            onChange={handleChange}
+            onChange={handleSearchInputChange}
             placeholder='Please search here'
           />
           <div className={inputStyle.search}><BiSearch /></div>
         </div>
         <select
           className={inputStyle.select}
-          value={filter}
-          onChange={(e) => { setFilter(e.target.value) }}
+          value={selectedRegion}
+          onChange={handleRegionChange}
         >
           <option value=''>Filter by region</option>
           <option value='Africa'>Africa</option>
@@ -59,8 +63,7 @@ const Input = () => {
           <option value='Europe'>Europe</option>
         </select>
       </form>
-              <Countries countryList={allCountries} />
-     
+      <Countries countryList={countryList} />
     </>
   );
 };
