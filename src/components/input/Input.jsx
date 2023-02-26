@@ -19,7 +19,8 @@ const Input = () => {
       try {
         const response = await fetch(`https://restcountries.com/v3.1/${searchEndpoint}`);
         const data = await response.json();
-        setCountryList(data);
+        // sort the countryList array alphabetically by name
+        setCountryList(data.sort((a, b) => a.name.common.localeCompare(b.name.common)));
       } catch (error) {
         console.error(error);
       }
@@ -69,4 +70,8 @@ const Input = () => {
 };
 
 export default Input;
+
+/*The sort() method takes a function that compares two elements of the array and returns a negative number if the first element should come before the second, a positive number if the first element should come after the second, or 0 if they are equal. In this case, we're using the localeCompare() method of the string object to compare the common names of the countries.*/
+
+
 
