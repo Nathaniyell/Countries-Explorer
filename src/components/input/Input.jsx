@@ -7,26 +7,25 @@ const Input = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [allCountries, setAllCountries] = useState([]);
   const [filter, setFilter] = useState('');
+  const [endpoint, setEndPoint] = useState('all')
 
   useEffect(() => {
     if (!searchTerm && !filter) {
       return;
     }
 
-    let endpoint = "all";
+    // let endpoint = "all";
     if (searchTerm.trim().length > 0) {
-      endpoint = `name/${searchTerm}`;
+      setEndPoint(`name/${searchTerm}`);
     } else if (filter) {
-      endpoint = `region/${filter}`;
+       setEndPoint(`region/${filter}`);
     }
 
     fetch(`https://restcountries.com/v3.1/${endpoint}`)
       .then(res => res.json())
-      .then(data => {
-        setAllCountries(data);
-      })
+      .then(data => setAllCountries(data))
       .catch(err => console.error(err));
-  }, [searchTerm, filter]);
+  }, [searchTerm, filter, endpoint]);
 
   function handleChange(e) {
     setSearchTerm(e.target.value);
@@ -34,6 +33,7 @@ const Input = () => {
 
   function formSubmitHandler(event) {
     event.preventDefault();
+    // setSearchTerm("")
   }
 
   return (

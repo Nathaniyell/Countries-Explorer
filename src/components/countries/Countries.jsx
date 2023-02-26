@@ -3,7 +3,7 @@ import styles from './countries.module.css'
 
 
 const Countries = ({ countryList = [] }) => {
-  if (!countryList.length) return null;
+  if (!countryList.length){return null} ;
 
   const renderCountryCard = (country) => {
     const { name: { official }, flags, population, region, capital } = country;

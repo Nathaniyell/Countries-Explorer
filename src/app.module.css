@@ -13,9 +13,7 @@
 --Very-Light-Gray-(Light Mode Background): hsl(0, 0%, 98%);
 -White-(Dark Mode Text & Light Mode Elements): hsl(0, 0%, 100%);
 }
-.main{
-/*   padding: 15px; */
-  width: 100vw;
+  body{
+      background: #eee;
   height: 100%;
-  background: #eee;
-}
+  }

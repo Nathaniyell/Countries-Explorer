@@ -1,6 +1,6 @@
 .form{
   width: 90%;
-  margin: 70px auto 0;
+  margin: 150px auto 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,4 +35,35 @@ select{
     color:  hsl(0, 0%, 40%);
   cursor: pointer;
   text-indent: 0px;
+}
+@media(max-width: 922px){
+  form{
+    width: 95%;
+  }
+  .inputDiv{
+    width: 70%;
+  }
+  .select{
+    width: 30%;
+  }
+}
+@media(max-width: 700px){
+  form{
+    flex-direction: column;
+    gap: 35px;
+  }
+  input{
+    width: 100%;
+  }
+  .select{
+    width: 70%;
+  }
+}
+@media(max-width: 540px){
+   .inputDiv{
+    width: 90%;
+  }
+  .select{
+    width: 90%;
+  }
 }
