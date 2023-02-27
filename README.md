@@ -1,17 +1,52 @@
-## Running React on Repl.it
+# Countries Explorer
 
-[React](https://reactjs.org/) is a popular JavaScript library for building user interfaces.
+This is a simple React App that allows users to search for countries using the REST Countries API. Users can search for countries by the name or filter them by the region. The App displays the results as a list of country cards that show basic information about each country. This app provides details about each country, including its flag, capital, population and more.
 
-[Vite](https://vitejs.dev/) is a blazing fast frontend build tool that includes features like Hot Module Reloading (HMR), optimized builds, and TypeScript support out of the box.
+## Screenshots
 
-Using the two in conjunction is one of the fastest ways to build a web app.
+![Countries Explorer](https://www.linkpicture.com/q/country-explorer.png)
 
-### Getting Started
-- Hit run
-- Edit [App.jsx](#src/App.jsx) and watch it live update!
+## How this project can help
+This project can be helpful to anyone who wants to learn more about the countries in the world. It provides an easy-to-use interface for searching and filtering countries, as well as detailed information about each country. Whether you're planning a trip, doing research, or just curious about the world, Country Explorer can help you discover new countries and learn interesting facts about them.
 
-By default, Replit runs the `dev` script, but you can configure it by changing the `run` field in the [configuration file](#.replit). Here are the vite docs for [serving production websites](https://vitejs.dev/guide/build.html)
+## Features
 
-### Typescript
+- Search for countries by name  
+- Filter countries by region
+- View country details including flag, capital, population, and more
+- Sort and display the countries alphabetically
+- Responsive design that adapts to different screen sizes.
 
-Just rename any file from `.jsx` to `.tsx`. You can also try our [TypeScript Template](https://replit.com/@replit/React-TypeScript)
+
+## Dependencies
+This project makes use of the following dependenceies:
+- React
+- React-DOM
+- React-Router-DOM
+- React-Scripts
+- React-Icons
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/Nathaniyell/Countries-Explorer
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run start
+```
+
+## Live Demo
+
+Here is a link to a live demo of the project: [Countries Explorer](https://rest-countries.nathanielessien.repl.co)
+
